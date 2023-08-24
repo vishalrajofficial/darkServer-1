@@ -1,0 +1,155 @@
+//4225560   Aug 4, 2013 5:26:26 AM	fuwutu	 B - Road Construction	 GNU C++0x	Accepted	30 ms	0 KB
+#include <cstdio>
+
+int main()
+{
+    int n, m, a, b;
+    bool fire[1001] = {false};
+    scanf("%d%d", &n, &m);
+    while (m--)
+    {
+        scanf("%d%d", &a, &b);
+        fire[a] = true;
+        fire[b] = true;
+    }
+    int x = 1;
+    while (fire[x])
+    {
+        x++;
+    }
+    printf("%d\n", n - 1);
+    for (int i = 1; i < x; ++i)
+    {
+        printf("%d %d\n", i, x);
+    }
+    for (int i = x + 1; i <= n; ++i)
+    {
+        printf("%d %d\n", x, i);
+    }
+    return 0;
+}
+//4239012   Aug 7, 2013 10:06:36 AM	fuwutu	 4B - Before an Exam	 GNU C++0x	Accepted	 30 ms	 0 KB
+#include <cstdio>
+#include <numeric>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    int d, sumTime, minTime[30], maxTime[30];
+    scanf("%d%d", &d, &sumTime);
+    for (int i = 0; i < d; ++i)
+    {
+        scanf("%d%d", &minTime[i], &maxTime[i]);
+    }
+    int minTimeSum = accumulate(minTime, minTime + d, 0);
+    int maxTimeSum = accumulate(maxTime, maxTime + d, 0);
+    if (minTimeSum <= sumTime && sumTime <= maxTimeSum)
+    {
+        printf("YES\n");
+        for (int i = 0; i < d; ++i)
+        {
+            int t = min(minTime[i] + sumTime - minTimeSum, maxTime[i]);
+            printf((i + 1 < d ? "%d " : "%d\n"), t);
+            sumTime -= (t - minTime[i]);
+        }
+    }
+    else
+    {
+        printf("NO\n");
+    }
+    return 0;
+
+using namespace std;
+
+struct point
+{
+    int x;
+    int y;
+};
+
+bool cmp(const point& left, const point& right)
+{
+    return (left.x < right.x)
+        || (left.x == right.x && left.y < right.y);
+}
+
+int main()
+{
+    point p[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        cin >> p[i].x >> p[i].y;
+    }
+    sort(p, p + 8, cmp);
+    if (   p[0].x == p[1].x && p[1].x == p[2].x
+        && p[2].x != p[3].x
+        && p[3].x == p[4].x
+        && p[4].x != p[5].x
+        && p[5].x == p[6].x && p[6].x == p[7].x
+        && p[0].y == p[3].y && p[3].y == p[5].y
+        && p[5].y != p[1].y
+        && p[1].y == p[6].y
+        && p[6].y != p[2].y
+        && p[2].y == p[4].y && p[4].y == p[7].y)
+    {
+        cout << "respectable" << endl;
+    }
+    else
+    {
+        cout << "ugly" << endl;
+    }
+    return 0;
+
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+						"GlossSeeAlso": ["GML", "XML"]
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}
+}
+515C
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int n, num;
+string a, b, c = "322", d = "7222", e = "53", f = "7332";
+int main() {
+    cin >> n >> a;
+    for (int i = 0; i < n; i++) {
+        num = a[i] - 48;
+        if (num > 1) {
+            if (num == 4) {
+                b += c;
+            } else if (num == 8) {
+                b += d;
+            } else if (num == 6) {
+                b += e;
+            } else if (num == 9) {
+                b += f;
+            } else {
+                b += a[i];
+            }
+        }
+    }
+    sort(b.begin(), b.end());
+    reverse(b.begin(), b.end());
+    cout << b;
+}
